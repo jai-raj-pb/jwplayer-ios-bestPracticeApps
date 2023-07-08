@@ -20,7 +20,11 @@ class PlayerViewController: ViewController {
     
     // MARK: - Public Methods and Properties
     
-    /// This is the config to load in the player. When set it will initialize the view hierarchy if it isn't set already, and
+    @IBOutlet weak var button: UIButton!
+    /// This i) load in the player. When set it will initialize the view hierarchy if it isn't set already, and
+    @IBAction func buttonTap(_ sender: UIButton) {
+        viewManager.playerView.pictureInPictureController?.startPictureInPicture()
+    }
     /// it will initialize the player with the given configuration.
     var config: JWPlayerConfiguration? {
         didSet {
@@ -67,6 +71,7 @@ class PlayerViewController: ViewController {
                 viewManager?.currentTime = time
             }
         }
+        view.bringSubviewToFront(button)
     }
     
     /// When called, the video will be presented in full screen mode.
@@ -100,6 +105,7 @@ class PlayerViewController: ViewController {
                 self?.player.play()
             }
         }
+        view.bringSubviewToFront(button)
     }
 }
 
@@ -253,6 +259,9 @@ extension PlayerViewController: JWPlayerStateDelegate {
 /// We observe ad event callbacks from the JWPlayer object so we know when the player's advertising state or information has changed.
 /// We set this view controller as the JWAdDelegate in `viewDidLoad`
 extension PlayerViewController: JWAdDelegate {
+    func jwplayer(_ player: AnyObject, adEvent event: JWPlayerKit.JWAdEvent) {
+    }
+    
     func jwplayer(_ player: JWPlayer, adEvent event: JWAdEvent) {
         DispatchQueue.main.async { [weak viewManager] in
             switch event.type {

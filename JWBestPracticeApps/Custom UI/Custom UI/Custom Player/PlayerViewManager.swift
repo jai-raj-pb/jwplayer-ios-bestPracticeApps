@@ -134,6 +134,7 @@ class PlayerViewManager {
     init() {
         container.addSubview(playerView)
         playerView.fillSuperview()
+        playerView.allowsPictureInPicturePlayback = true
     }
     
     /**

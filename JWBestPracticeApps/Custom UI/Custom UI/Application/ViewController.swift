@@ -18,26 +18,27 @@ class ViewController: UIViewController {
         if let vc = segue.destination as? PlayerViewController {
             let videoUrl = URL(string:videoUrlString)!
             let posterUrl = URL(string:posterUrlString)!
-            let adURL = URL(string: adUrlString)!
 
             // Open a do-catch block to handle possible errors with the builders.
             do {
+                var captions = [JWMediaTrack]()
+                if let path = Bundle.main.path(forResource: "sample", ofType: "vtt") {
+                    let captionsTrack = try JWCaptionTrackBuilder()
+                        .file(URL(fileURLWithPath: path))
+                        .label("English")
+                        .defaultTrack(true)
+                        .build()
+                    captions.append(captionsTrack)
+                }
                 // First, use the JWPlayerItemBuilder to create a JWPlayerItem that will be used by the player configuration.
                 let playerItem = try JWPlayerItemBuilder()
                     .file(videoUrl)
                     .posterImage(posterUrl)
+                    .mediaTracks(captions)
                     .build()
-
-                // Second, use the JWAdsAdvertisingConfigBuilder to create a JWAdvertisingConfig that will be used by the player configuration.
-                let adConfig = try JWAdsAdvertisingConfigBuilder()
-                    // Set the VAST tag for the builder to use.
-                    .tag(adURL)
-                    .build()
-
                 // Third, create a player config with the created JWPlayerItem and JWAdvertisingConfig
                 let config = try JWPlayerConfigurationBuilder()
                     .playlist(items: [playerItem])
-                    .advertising(adConfig)
                     .autostart(true)
                     .build()
 

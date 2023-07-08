@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -48,9 +48,30 @@
                     <view key="view" contentMode="scaleToFill" id="DuQ-6K-Hdf">
                         <rect key="frame" x="0.0" y="0.0" width="374" height="210.5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZP0-s1-gQd">
+                                <rect key="frame" x="167" y="85.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Usa-oV-Ca6"/>
+                                    <constraint firstAttribute="height" constant="40" id="r1l-g5-woz"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="buttonTap:" destination="ocR-Fx-dDf" eventType="touchUpInside" id="ETN-Nr-xYv"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="VOR-cL-xEc"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZP0-s1-gQd" firstAttribute="centerY" secondItem="DuQ-6K-Hdf" secondAttribute="centerY" id="1yV-Ro-CYm"/>
+                            <constraint firstItem="ZP0-s1-gQd" firstAttribute="centerX" secondItem="DuQ-6K-Hdf" secondAttribute="centerX" id="bYe-Y2-xXA"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="button" destination="ZP0-s1-gQd" id="S1n-6n-32e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uZ6-9g-21x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,13 +7,21 @@
 
 import UIKit
 import JWPlayerKit
+import AVKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Add your JW Player license key.
-        // JWPlayerKitLicense.setLicenseKey(<#key: String#>)
+         JWPlayerKitLicense.setLicenseKey("") // enter your key
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback, options: [])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Error activating the AVAudioSession:", error.localizedDescription)
+        }
+        
         return true
     }
 
